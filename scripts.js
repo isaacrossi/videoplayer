@@ -3,7 +3,10 @@ const video = document.querySelector('video.player__video');
 
 
 //when we click the play button, toggle the pause/play state of the video and also toggle the symbol shown on the button
-playButton.addEventListener('click', () => {
+playButton.addEventListener('click', togglePlayPause)
+video.addEventListener('click', togglePlayPause)
+
+function togglePlayPause () {
   if (video.paused) {
     video.play();
     playButton.innerHTML = "⏸"
@@ -12,5 +15,4 @@ playButton.addEventListener('click', () => {
     video.pause();
     playButton.innerHTML = "►"
   }
-})
-
+}
