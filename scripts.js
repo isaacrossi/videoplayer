@@ -3,6 +3,9 @@ const video = document.querySelector('video.player__video');
 const audioSlider = document.querySelector('input.volume');
 const playbackSlider = document.querySelector('input.playback');
 const progress = document.querySelector('div.progress__filled')
+const skipButtons = document.querySelectorAll('button.player__button')
+
+let seconds;
 
 
 //when we click the play button, toggle the pause/play state of the video and also toggle the symbol shown on the button
@@ -28,16 +31,25 @@ audioSlider.addEventListener("input", () => {
 playbackSlider.addEventListener("input", () => {
   const playbackSpeed = playbackSlider.value
   video.playbackRate = playbackSpeed
-  console.log(video.duration)
 })
 
 function onDurationChange () {
   if (video.readyState > 0) {
+    seconds = video.currentTime;
     // var minutes = parseInt(video.currentTime / 60, 10);
-		var seconds = video.currentTime;
     progress.style.flexBasis = `${(seconds/video.duration) * 100}%`
+    console.log(video.currentTime + 'a')
   }
 }
 
 video.addEventListener('timeupdate', onDurationChange)
+
+skipButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.getAttribute('data-skip')
+    video.currentTime += parseFloat(value);
+    console.log(video.currentTime + 'b')
+  })
+})
+
 
