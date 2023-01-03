@@ -61,8 +61,8 @@ function scrub(e) {
 let mousedown = false;
 progressHolder.addEventListener('click', scrub)
 progressHolder.addEventListener('mousemove', () => mousedown && scrub)
-progressHolder.addEventListener('mousdown', () => mousedown = true)
-progressHolder.addEventListener('mousdown', () => mousedown = false)
+progressHolder.addEventListener('mousedown', () => mousedown = true)
+progressHolder.addEventListener('mouseup', () => mousedown = false)
 
 
 
