@@ -3,6 +3,7 @@ const video = document.querySelector('video.player__video');
 const audioSlider = document.querySelector('input.volume');
 const playbackSlider = document.querySelector('input.playback');
 const progress = document.querySelector('div.progress__filled')
+const progressHolder = document.querySelector('div.progress')
 const skipButtons = document.querySelectorAll('button.player__button')
 
 let seconds;
@@ -51,5 +52,17 @@ skipButtons.forEach(button => {
     console.log(video.currentTime + 'b')
   })
 })
+
+function scrub(e) {
+  const scrubTime = (e.offsetX / progressHolder.offsetWidth) * video.duration;
+  video.currentTime = scrubTime
+}
+
+let mousedown = false;
+progressHolder.addEventListener('click', scrub)
+progressHolder.addEventListener('mousemove', () => mousedown && scrub)
+progressHolder.addEventListener('mousdown', () => mousedown = true)
+progressHolder.addEventListener('mousdown', () => mousedown = false)
+
 
 
